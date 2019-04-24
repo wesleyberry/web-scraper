@@ -1,0 +1,53 @@
+body {
+    background-image: url(../images/bbc.png);
+    background-repeat: repeat;
+}
+.container {
+    height: 60vh;
+    width: 50vw;
+    background-color: rgb(199, 198, 198, .95);
+    margin: auto;
+    margin-top: 5vh;
+    text-align: center;
+    border-radius: 16px;
+}
+a {
+    color: black !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+h2 {
+    margin-top: 5%;
+}
+.bbc-button,
+.npr-button,
+.cnn-button {
+    border-radius: 4px;
+    border-width: 4px;
+    border-style: solid;
+    text-align: center;
+    width: 20vw;
+    margin-top: 8%;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: .3s;
+}
+.bbc-button {
+    background-color: rgb(187,25,25);
+}
+.npr-button {
+    background-color: rgb(35,123,189);
+    /* border-color:rgb(214,32,33); */
+    border-color: black;
+}
+.cnn-button {
+    background-color: rgb(203,0,0);
+    border-color: black;
+}
+.bbc-button:hover,
+.npr-button:hover,
+.cnn-button:hover {
+    background-color: white;
+    transition: .3s;
+}
