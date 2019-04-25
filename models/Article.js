@@ -19,7 +19,8 @@ var ArticleSchema = new Schema({
 
     link: {
         type: String,
-        trim: true
+        trim: true,
+        unique: true
     },
 
     image: {
@@ -32,10 +33,10 @@ var ArticleSchema = new Schema({
         trim: true
     },
 
-    comment: {
+    comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    },
+    }],
 
     saved: {
         type: Boolean,

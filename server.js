@@ -27,17 +27,63 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 var db = require("./models");
 
 // HTML Route
-require("./routes/html-routes.js")(app);
-
-// API Routes
-// require("./routes/bbc-routes.js")(app);
-// require("./routes/npr-routes.js")(app);
-// require("./routes/cnn-routes.js")(app);
+require("./routes/html-routes.js")(app, db);
+require("./routes/save-and-delete-routes.js")(app, db);
 
 // Scrapes
-require("./scrape/bbc-scrape.js")(axios, cheerio, db.Article);
-// require("./scrape/npr-scrape.js")(axios, cheerio, db.Article);
-// require("./scrape/cnn-scrape.js")(axios, cheerio, db.Article);
+function runBBC() {
+    require("./scrape/bbc-scrape.js")(axios, cheerio, db.Article);
+}
+function runCNN() {
+    require("./scrape/cnn-scrape.js")(axios, cheerio, db.Article);
+}
+function runNPR() {
+    require("./scrape/npr-scrape.js")(axios, cheerio, db.Article);
+}
+
+// runBBC();
+// runCNN();
+// runNPR();
+var secondsInADay = 86400;
+var millisecondsPerSecond = 1000;
+setInterval(function(){
+    runBBC();
+}, secondsInADay * millisecondsPerSecond);
+setInterval(function(){
+    runNPR();
+}, secondsInADay * millisecondsPerSecond + 10000);
+setInterval(function(){
+    runCNN();
+}, secondsInADay * millisecondsPerSecond + 20000);
+
+app.post("/scrape/:id", function(req, res) {
+    var id = req.params.id;
+    console.log(id);
+    if(id === "BBC") {
+        runBBC();
+    } else if (id === "NPR") {
+        runNPR();
+    } else if (id === "CNN") {
+        runCNN();
+    }
+});
+
+// Posting comments
+app.post("/comments/:id", function(req, res) {
+    var id = req.params.id;
+    db.Comment.create(req.body).then(function(dbComment) {
+        console.log(dbComment._id);
+        return db.Article.findOneAndUpdate(
+            { _id: id},
+            { $push: {comment: dbComment._id}},
+            { new: true}
+        ).then(function(dbArticle) {
+            res.json(dbArticle);
+        }).catch(function(err) {
+            res.json(err);
+        });
+    });
+});
 
 app.listen(PORT, function() {
     // eslint-disable-next-line no-console

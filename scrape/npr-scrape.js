@@ -1,5 +1,5 @@
 
-module.exports = function(axios, cheerio) {
+module.exports = function(axios, cheerio, Article) {
     console.log("-------------------------------\n" +
             "Grabbing data from NPR\n");
 
@@ -17,6 +17,19 @@ module.exports = function(axios, cheerio) {
             console.log(link+ "\n");
             console.log(image);
             console.log(broadcaster);
+
+            // Creates a document in the database
+            Article.create({
+                title: title,
+                summary: summary,
+                link: link,
+                broadcaster: broadcaster,
+                image: image
+            }).then(function(dbArticle) {
+                console.log(dbArticle)
+            }).catch(function(err) {
+                console.log(err);
+            });
         });
     });
 }

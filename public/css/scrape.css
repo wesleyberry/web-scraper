@@ -1,3 +1,6 @@
+body {
+    font-family: Georgia;
+}
 .nav-item {
     margin-left: 5%;
 }
@@ -16,4 +19,29 @@ button.scrape {
     border-color:rgb(187,25,25);
     border-radius:4px;
     box-shadow: none;
+}
+.container {
+    margin-top: 5%;
+}
+.card {
+    margin: 30px;
+}
+button.save-button {
+    background-color: rgb(35,123,189);
+    margin-left: 22%;
+    transition: .3s;
+}
+button.save-button:hover {
+    background-color: rgb(187,25,25);
+    transition: .3s;
+}
+.delete-button,
+.comment-button {
+    background-color: rgb(35,123,189);
+    transition: .3s;
+}
+.delete-button:hover,
+.comment-button:hover {
+    background-color: rgb(187,25,25);
+    transition: .3s;
 }

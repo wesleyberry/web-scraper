@@ -1,11 +1,11 @@
 
-module.exports = function(axios, cheerio) {
+module.exports = function(axios, cheerio, Article) {
     console.log("-------------------------------\n" +
             "Grabbing data from CNN\n");
 
     axios.get("https://www.cnn.com/specials/us/energy-and-environment").then(function(response) {
         var $ = cheerio.load(response.data);
-        var domain = "https://www.cnn.com/specials/us/energy-and-environment";
+        var domain = "https://www.cnn.com";
         $("div.cn__column").each(function(i, element) {
             var title = $(element).find("span.cd__headline-text").text();
             title = title.trim();
@@ -17,6 +17,18 @@ module.exports = function(axios, cheerio) {
             console.log(link+ "\n");
             console.log(image);
             console.log(broadcaster);
+
+            // Creates a document in the database
+            Article.create({
+                title: title,
+                link: link,
+                broadcaster: broadcaster,
+                image: image
+            }).then(function(dbArticle) {
+                console.log(dbArticle)
+            }).catch(function(err) {
+                console.log(err);
+            });
         });
     });
 }

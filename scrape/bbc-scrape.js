@@ -5,23 +5,22 @@ module.exports = function(axios, cheerio, Article) {
 
     axios.get("https://www.bbc.com/news/world").then(function(response) {
         var $ = cheerio.load(response.data);
-        var domain = "https://www.bbc.com/news/world";
+        var domain = "https://www.bbc.com";
         var results = [];
         $("div.sparrow-item.faux-block-link").each(function(i, element) {
             var title = $(element).find("span").text();
             title = title.trim();
             var summary = $(element).find("a").last().text();
             summary = summary.trim().replace("Full article", "");
+            summary = summary.replace("From the section", "");
             var link = domain + $(element).find("a").attr("href");
             var broadcaster = "BBC";
-            var image = "https://via.placeholder.com/300";
-            // var image = $(element).find("img").attr("src");
+            var image = "http://static.bbcverticals.com/wwfeatures/tv/assets/logos/16x9/bbc-world-news.png";
             console.log("--------------------------------\n")
             console.log(title);
             console.log(summary);
             console.log(link);
             console.log(broadcaster);
-            // console.log(image);
 
             // Creates a document in the database
             Article.create({
@@ -35,8 +34,6 @@ module.exports = function(axios, cheerio, Article) {
             }).catch(function(err) {
                 console.log(err);
             });
-
-
         });
     });
 }
