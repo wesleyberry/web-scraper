@@ -26,6 +26,7 @@ $(document).on("click", ".delete-button", function () {
     });
 });
 
+// Scrapes a website
 $(document).on("click", ".scrape", function () {
     var id = $(this).attr("data-id");
     console.log(id);
@@ -39,6 +40,7 @@ $(document).on("click", ".scrape", function () {
     });
 });
 
+// Triggers the modal
 $(document).on("click", ".comment-button", function () {
     var id = $(this).attr("id");
     console.log(id);
@@ -47,6 +49,7 @@ $(document).on("click", ".comment-button", function () {
 
 });
 
+// Posts a comment to a route
 $(document).on("click", "button.submit-comment", function () {
     var text = $("textarea#message-text").val();
     var id = $(this).attr("id");

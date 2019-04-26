@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
+// Declaring Article Schema
 var ArticleSchema = new Schema({
 
     title: {

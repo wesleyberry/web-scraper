@@ -2,9 +2,10 @@
 module.exports = function (axios, cheerio, Article) {
     console.log("-------------------------------\n" +
         "Grabbing data from NPR\n");
-
+    // // Axios request for scraping NPR
     axios.get("https://www.npr.org/sections/news/").then(function (response) {
         var $ = cheerio.load(response.data);
+        // Scraping
         $("article.item.has-image").each(function (i, element) {
             var title = $(element).find("h2.title").text();
             var summary = $(element).find("p.teaser").not(".date").text();

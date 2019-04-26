@@ -2,11 +2,11 @@
 module.exports = function (axios, cheerio, Article) {
     console.log("-------------------------------\n" +
         "Grabbing data from BBC\n");
-
+    // // Axios request for scraping BBC
     axios.get("https://www.bbc.com/news/world").then(function (response) {
         var $ = cheerio.load(response.data);
         var domain = "https://www.bbc.com";
-        var results = [];
+        // Scraping
         $("div.sparrow-item.faux-block-link").each(function (i, element) {
             var title = $(element).find("span").text();
             title = title.trim();

@@ -2,10 +2,11 @@
 module.exports = function (axios, cheerio, Article) {
     console.log("-------------------------------\n" +
         "Grabbing data from CNN\n");
-
+    // Axios request for scraping CNN
     axios.get("https://www.cnn.com/specials/us/energy-and-environment").then(function (response) {
         var $ = cheerio.load(response.data);
         var domain = "https://www.cnn.com";
+        // Scraping
         $("div.cn__column").each(function (i, element) {
             var title = $(element).find("span.cd__headline-text").text();
             title = title.trim();

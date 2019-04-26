@@ -1,9 +1,11 @@
 var path = require("path");
 module.exports = function (app, db) {
+    // Sends Landing PAge
     app.get("/", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/html/landing.html"));
     });
 
+    // Renders Saved Page
     app.get("/saved", function (req, res) {
         db.Article.find({
             saved: true
@@ -15,6 +17,7 @@ module.exports = function (app, db) {
         });
     });
 
+    // Renders NPR Page
     app.get("/npr", function (req, res) {
         db.Article.find({ broadcaster: "NPR" }).then(function (docs) {
             var hbsObject = {
@@ -24,6 +27,7 @@ module.exports = function (app, db) {
         });
     });
 
+    // Renders BBC Page
     app.get("/bbc", function (req, res) {
         db.Article.find({ broadcaster: "BBC" }).then(function (docs) {
             var hbsObject = {
@@ -33,6 +37,7 @@ module.exports = function (app, db) {
         });
     });
 
+    // Renders CNN Page
     app.get("/cnn", function (req, res) {
         db.Article.find({ broadcaster: "CNN" }).then(function (docs) {
             var hbsObject = {

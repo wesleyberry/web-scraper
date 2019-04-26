@@ -56,6 +56,7 @@ setInterval(function () {
     runCNN();
 }, secondsInADay * millisecondsPerSecond + 20000);
 
+//  Post request for scraping a website
 app.post("/scrape/:id", function (req, res) {
     var id = req.params.id;
     console.log(id);

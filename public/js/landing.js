@@ -2,6 +2,7 @@ $(document).ready(function () {
     window.setInterval("changeImage()", 3000);
 });
 
+// Cycles through these images every 3 seconds
 function changeImage() {
     var imgs = ["url(../images/bbc.png)",
         "url(../images/cnn.jpg)",
