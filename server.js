@@ -41,9 +41,9 @@ function runNPR() {
     require("./scrape/npr-scrape.js")(axios, cheerio, db.Article);
 }
 
-// runBBC();
-// runCNN();
-// runNPR();
+runBBC();
+runCNN();
+runNPR();
 var secondsInADay = 86400;
 var millisecondsPerSecond = 1000;
 setInterval(function () {
@@ -90,7 +90,6 @@ app.post("/comments/:id", function (req, res) {
 });
 
 app.listen(PORT, function () {
-    // eslint-disable-next-line no-console
     console.log("Listening on port:" + PORT);
 });
 
