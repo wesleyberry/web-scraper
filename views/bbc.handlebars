@@ -26,12 +26,13 @@
 </nav>
 
 {{!-- Cards --}}
-<div class="container">
-  <div class="row">
-    {{#each articles}}
-        {{#unless saved}}
-            {{> cards}}
-        {{/unless}}
-    {{/each}}
+<div class="bbc-background"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      {{#each articles}}
+          {{#unless saved}}
+              {{> cards}}
+          {{/unless}}
+      {{/each}}
+    </div>
   </div>
-</div>

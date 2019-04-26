@@ -11,6 +11,9 @@ module.exports = function(axios, cheerio, Article) {
             var link = $(element).find("p.teaser").find("a").attr("href");
             var image = $(element).find("div.imagewrap").find("img").attr("src");
             var broadcaster = "NPR";
+            if (!image) {
+                image = "https://static.radio.net/images/broadcasts/3f/64/3576/c300.png";
+            }
             console.log("--------------------------------\n")
             console.log(title + "\n");
             console.log(summary+ "\n");

@@ -12,6 +12,9 @@ module.exports = function(axios, cheerio, Article) {
             var link = domain + $(element).find("h3.cd__headline").find("a").attr("href");
             var image = $(element).find("div.media").find("img").attr("data-src-small");
             var broadcaster = "CNN";
+            if (!image) {
+                image = "https://cdn.cnn.com/cnn/.e1mo/img/4.0/logos/CNN_logo_400x400.png";
+            }
             console.log("--------------------------------\n")
             console.log(title + "\n");
             console.log(link+ "\n");

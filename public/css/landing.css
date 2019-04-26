@@ -51,3 +51,18 @@ h2 {
     background-color: white;
     transition: .3s;
 }
+@media only screen and (min-width: 200px) {
+    .container {
+      width: 70vw;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .container {
+      width: 60vw;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .container {
+        height: 70vh;
+    }
+}

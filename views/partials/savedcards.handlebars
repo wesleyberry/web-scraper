@@ -21,17 +21,19 @@
         </button>
       </div>
       <div class="modal-body">
-        {{#if this.comment}}
-          {{#each this.comment}}
-            <h5>{{this.text}}</h5>
-          {{/each}}
-        {{/if}}
         <form>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Comment</label>
             <textarea class="form-control" id="message-text"></textarea>
           </div>
         </form>
+        <div class="modal-comments">
+          {{#if this.comment}}
+            {{#each this.comment}}
+              <h5><strong>Anonymous: </strong>{{this.text}}</h5>
+            {{/each}}
+          {{/if}}
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

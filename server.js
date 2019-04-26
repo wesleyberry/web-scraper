@@ -61,11 +61,15 @@ app.post("/scrape/:id", function(req, res) {
     console.log(id);
     if(id === "BBC") {
         runBBC();
+        res.send(200);
     } else if (id === "NPR") {
         runNPR();
+        res.send(200);
     } else if (id === "CNN") {
         runCNN();
+        res.send(200);
     }
+    res.end();
 });
 
 // Posting comments
