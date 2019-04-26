@@ -1,13 +1,13 @@
 
-module.exports = function(axios, cheerio, Article) {
+module.exports = function (axios, cheerio, Article) {
     console.log("-------------------------------\n" +
-            "Grabbing data from BBC\n");
+        "Grabbing data from BBC\n");
 
-    axios.get("https://www.bbc.com/news/world").then(function(response) {
+    axios.get("https://www.bbc.com/news/world").then(function (response) {
         var $ = cheerio.load(response.data);
         var domain = "https://www.bbc.com";
         var results = [];
-        $("div.sparrow-item.faux-block-link").each(function(i, element) {
+        $("div.sparrow-item.faux-block-link").each(function (i, element) {
             var title = $(element).find("span").text();
             title = title.trim();
             var summary = $(element).find("a").last().text();
@@ -29,9 +29,9 @@ module.exports = function(axios, cheerio, Article) {
                 link: link,
                 broadcaster: broadcaster,
                 image: image
-            }).then(function(dbArticle) {
+            }).then(function (dbArticle) {
                 console.log(dbArticle)
-            }).catch(function(err) {
+            }).catch(function (err) {
                 console.log(err);
             });
         });

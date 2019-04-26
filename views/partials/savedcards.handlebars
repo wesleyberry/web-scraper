@@ -1,4 +1,3 @@
-
 <div class="card" style="width: 18rem;">
   <a href={{this.link}} target="_blank">
     <img class="card-img-top" src={{this.image}} alt="Card image cap">
@@ -7,7 +6,8 @@
     <h4>{{this.title}}</h4>
     <p class="card-text">{{this.summary}}</p>
     <button class="delete-button btn btn-primary" id={{this._id}}>Delete</button>
-    <button type="button" class="comment-button btn btn-primary" id={{this._id}} data-toggle="modal" data-target="#{{this._id}}">Comments</button>
+    <button type="button" class="comment-button btn btn-primary" id={{this._id}} data-toggle="modal"
+      data-target="#{{this._id}}">Comments</button>
   </div>
 </div>
 
@@ -29,15 +29,15 @@
         </form>
         <div class="modal-comments">
           {{#if this.comment}}
-            {{#each this.comment}}
-              <h5><strong>Anonymous: </strong>{{this.text}}</h5>
-            {{/each}}
+          {{#each this.comment}}
+          <h5><strong>Anonymous: </strong>{{this.text}}</h5>
+          {{/each}}
           {{/if}}
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary submit-comment" id={{this._id}} >Post Comment</button>
+        <button type="button" class="btn btn-primary submit-comment" id={{this._id}}>Post Comment</button>
       </div>
     </div>
   </div>

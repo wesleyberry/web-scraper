@@ -16,12 +16,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Sets up Handlebars
-app.engine("handlebars",exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //  Database Connection
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/articledb";
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Models
 var db = require("./models");
@@ -46,20 +46,20 @@ function runNPR() {
 // runNPR();
 var secondsInADay = 86400;
 var millisecondsPerSecond = 1000;
-setInterval(function(){
+setInterval(function () {
     runBBC();
 }, secondsInADay * millisecondsPerSecond);
-setInterval(function(){
+setInterval(function () {
     runNPR();
 }, secondsInADay * millisecondsPerSecond + 10000);
-setInterval(function(){
+setInterval(function () {
     runCNN();
 }, secondsInADay * millisecondsPerSecond + 20000);
 
-app.post("/scrape/:id", function(req, res) {
+app.post("/scrape/:id", function (req, res) {
     var id = req.params.id;
     console.log(id);
-    if(id === "BBC") {
+    if (id === "BBC") {
         runBBC();
         res.send(200);
     } else if (id === "NPR") {
@@ -73,23 +73,23 @@ app.post("/scrape/:id", function(req, res) {
 });
 
 // Posting comments
-app.post("/comments/:id", function(req, res) {
+app.post("/comments/:id", function (req, res) {
     var id = req.params.id;
-    db.Comment.create(req.body).then(function(dbComment) {
+    db.Comment.create(req.body).then(function (dbComment) {
         console.log(dbComment._id);
         return db.Article.findOneAndUpdate(
-            { _id: id},
-            { $push: {comment: dbComment._id}},
-            { new: true}
-        ).then(function(dbArticle) {
+            { _id: id },
+            { $push: { comment: dbComment._id } },
+            { new: true }
+        ).then(function (dbArticle) {
             res.json(dbArticle);
-        }).catch(function(err) {
+        }).catch(function (err) {
             res.json(err);
         });
     });
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     // eslint-disable-next-line no-console
     console.log("Listening on port:" + PORT);
 });
